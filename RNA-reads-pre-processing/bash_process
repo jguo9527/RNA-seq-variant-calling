@@ -1,0 +1,10 @@
+%%bash
+
+java -jar /Volumes/KIOXIA/Hemp/alignment/gatk-package-4.6.1.0-local.jar CreateSequenceDictionary -R /Volumes/KIOXIA/Hemp/alignment/reference/GCF_029168945.1_ASM2916894v1_rna_from_genomic.fasta
+
+samtools faidx /Volumes/KIOXIA/Hemp/alignment/reference/GCF_029168945.1_ASM2916894v1_rna_from_genomic.fasta
+
+samtools view /Volumes/KIOXIA/Hemp/alignment/duplicates_marked/marked_rg_3102SE_1F_AGAGTATCAG-ACCTGTATCC_L003__Aligned.sortedByCoord.out.bam | cut -f 10 | awk '{print length($1)}' | sort -n | \
+  awk 'NR==int((NR+1)/2) {print "Median:", $1}'
+
+bcftools mpileup -Ou -f /Volumes/KIOXIA/Hemp/alignment/reference/GCF_029168945.1_ASM2916894v1_genomic.fasta /Volumes/KIOXIA/Hemp/alignment/Ncigar_split/*.bam > /Volumes/KIOXIA/Hemp/alignment/mpileup/pre_calls.bcf

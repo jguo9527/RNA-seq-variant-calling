@@ -1,0 +1,16 @@
+import subprocess
+import matplotlib.pyplot as plt
+
+# Run samtools and get sequence lengths
+command = "samtools view /Volumes/KIOXIA/Hemp/alignment/alignment-files/SK_2_CCGTGGTGAA-CCGTCCAGTT_L003__Aligned.sortedByCoord.out.bam | cut -f 10 | awk '{print length($1)}'"
+lengths = subprocess.check_output(command, shell=True).decode().splitlines()
+
+# Convert lengths to integers
+lengths = [int(length) for length in lengths]
+
+# Plot histogram
+plt.hist(lengths, bins=50, edgecolor='black')
+plt.title('Sequence Length Distribution')
+plt.xlabel('Sequence Length')
+plt.ylabel('Frequency')
+plt.show()
