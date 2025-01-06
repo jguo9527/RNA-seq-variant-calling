@@ -8,3 +8,6 @@ samtools view /Volumes/KIOXIA/Hemp/alignment/duplicates_marked/marked_rg_3102SE_
   awk 'NR==int((NR+1)/2) {print "Median:", $1}'
 
 bcftools mpileup -Ou -f /Volumes/KIOXIA/Hemp/alignment/reference/GCF_029168945.1_ASM2916894v1_genomic.fasta /Volumes/KIOXIA/Hemp/alignment/Ncigar_split/*.bam > /Volumes/KIOXIA/Hemp/alignment/mpileup/pre_calls.bcf
+
+
+bcftools view -e'QUAL<10 || (RPB<0.1 && QUAL<15) || (AC<2 && QUAL<15) || MAX(DV)<=3 || MAX(DV)/MAX(DP)<=0.3' /Volumes/KIOXIA/Hemp/alignment/mpileup/pre_calls.bcf > /Volumes/KIOXIA/Hemp/alignment/Vcf_called/calls.vcf.gz
