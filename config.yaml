@@ -1,0 +1,10 @@
+raw_bam_dir: "alignment/alignment-files"
+rg_dir: "alignment/RG_added"
+dup_dir: "alignment/duplicates_marked"
+split_dir: "alignment/Ncigar_split"
+mpileup_dir: "alignment/mpileup"
+vcf_dir: "alignment/Vcf_called"
+ref_fasta: "alignment/reference/GCF_029168945.1_ASM2916894v1_genomic.fasta"
+gatk_jar: "alignment/gatk-package-4.6.1.0-local.jar"
+picard_jar: "alignment/picard.jar"
+threads: 8
